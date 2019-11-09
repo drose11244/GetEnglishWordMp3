@@ -4,6 +4,7 @@ import requests
 from urllib.parse import urlparse
 import sys
 import bs4
+import os
 
 
 def basename(url):
@@ -58,7 +59,12 @@ def main():
             # filen_information = urlparse(url)
             # url_path = filen_information.path
             get_basename = search_word+".mp3"
-            path = 'voices/'+str(get_basename)
+            folder = 'voices/'
+            if not os.path.exists(folder):
+                os.makedirs(folder)
+                print("builded folder")
+            
+            path = folder +str(get_basename)
             with open(path,'wb') as f:
                 f.write(response.content)
                 print("")

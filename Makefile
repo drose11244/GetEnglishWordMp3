@@ -4,7 +4,8 @@
 # file= hello_requests.py
 file = getEnglishMP3.py
 
-make:
-	python3 $(file)
-build:
+file:
 	pyinstaller -F $(file)
+
+all:
+	python3 $(file)
