@@ -3,7 +3,6 @@
 import requests
 import bs4
 
-
 def basename(url):
     get_Position = url.rfind('/') + 1
     return url[get_Position:]
@@ -77,13 +76,14 @@ def main():
             # English
             get_explain_English = get_explain[explain].find('div', class_='def ddef_d db')
             explain_English = get_explain_English.text.strip()
-            print(explain_English)
+            print("<div>"+explain_English+"<div>")
 
             # Mandarin
             get_explain_Mandarin = get_explain[explain].find('span', class_='trans dtrans dtrans-se')
             explain_Mandarin = get_explain_Mandarin.text.strip()
 
-            print(explain_Mandarin)
+            # print(explain_Mandarin)
+            print("<div>"+explain_Mandarin+"<div>")
             print("")
 
 

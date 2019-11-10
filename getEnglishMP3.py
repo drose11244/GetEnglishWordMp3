@@ -46,6 +46,7 @@ def main():
             search_word = input()
             dict_url_header = 'https://dictionary.cambridge.org/zht/%E8%A9%9E%E5%85%B8/%E8%8B%B1%E8%AA%9E-%E6%BC%A2%E8%AA%9E-%E7%B9%81%E9%AB%94/'
             dict_url = dict_url_header+search_word
+            
             get_dict_information = requests.get(dict_url, headers=headers, cookies=cookies)
             getResult = bs4.BeautifulSoup(get_dict_information.text)
             allData = getResult.findAll('source')
