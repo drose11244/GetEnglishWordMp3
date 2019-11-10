@@ -86,6 +86,12 @@ def main():
             print("<div>"+explain_Mandarin+"<div>")
             print("")
 
+            # Next time work to add example in explain
+            # if getExplain_In_block[1].find('div',class_='examp dexamp'):
+            #     print("yes")
+            # else:
+            #     print('no')
+
 
 if __name__== "__main__":
     main()
