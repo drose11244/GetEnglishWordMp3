@@ -23,7 +23,7 @@ def main():
             dict_url = dict_url_header+search_word
             
             get_dict_information = requests.get(dict_url, headers=cookieAndheaders.headers, cookies=cookieAndheaders.cookies)
-            getResult = bs4.BeautifulSoup(get_dict_information.text)
+            getResult = bs4.BeautifulSoup(get_dict_information.text,'html.parser')
             allData = getResult.findAll('source')
             websit_mp3_header = 'https://dictionary.cambridge.org'
             get_dict_websit_mp3 = str(websit_mp3_header)+allData[2]['src']
