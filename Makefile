@@ -1,7 +1,7 @@
 
 .PHONY: all
 
-# file= hello_requests.py
+# file= explain_module.py
 # file = getEnglishMP3.py
 # file = explain.py
 file = makeAnkiData.py
