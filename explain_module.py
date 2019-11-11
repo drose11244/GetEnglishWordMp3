@@ -2,14 +2,12 @@
 # coding=UTF-8
 import requests
 import bs4
-
-def basename(url):
-    get_Position = url.rfind('/') + 1
-    return url[get_Position:]
-
-def main():
+import csv
 
 
+# def main():
+
+def get_explain(word):
     # https://curl.trillworks.com/ <= It's good websit can tranlate bash curl to python format
     cookies = {
         'XSRF-TOKEN': 'd8212e83-98e4-4a7c-b5d5-a74e3824923f',
@@ -33,11 +31,14 @@ def main():
         'Connection': 'keep-alive',
     }
 
-
     # url = 'https://dictionary.cambridge.org/zht/%E8%A9%9E%E5%85%B8/%E8%8B%B1%E8%AA%9E-%E6%BC%A2%E8%AA%9E-%E7%B9%81%E9%AB%94/courier'
     # url = 'https://dictionary.cambridge.org/zht/%E8%A9%9E%E5%85%B8/%E8%8B%B1%E8%AA%9E-%E6%BC%A2%E8%AA%9E-%E7%B9%81%E9%AB%94/turkish?q=Turkish'
-    print("input search word ")
-    search_word = input()
+    # print("input search word ")
+    # search_word = input()
+
+    get_value ={}
+    get_Total=''
+    search_word = word
     dict_url_header = 'https://dictionary.cambridge.org/zht/%E8%A9%9E%E5%85%B8/%E8%8B%B1%E8%AA%9E-%E6%BC%A2%E8%AA%9E-%E7%B9%81%E9%AB%94/'
     dict_url = dict_url_header+search_word
 
@@ -46,16 +47,21 @@ def main():
 
     # Word
     getWord = getResult.findAll('div', class_='di-title')
-    print("")
-    print(getWord[1].text.strip())
-    print("")
+    getWord = getWord[1].text.strip()
+    get_value['Word'] = getWord
+
+    # print("")
+    # print(getWord)
+    # print("")
 
 
     #音標 Phonetic symbol
     get_phonetic_symbol = getResult.findAll('span', class_='ipa dipa lpr-2 lpl-1')
     phonetic_symbol = '/'+get_phonetic_symbol[0].text.strip()+'/'
-    print(phonetic_symbol)
-    print("")
+    get_value['PhoneticSymol'] = phonetic_symbol
+    # get_value['PhoneticSymbol':phonetic_symbol]
+    # print(phonetic_symbol)
+    # print("")
     
 
     # get part of speech
@@ -66,7 +72,8 @@ def main():
         # part of speech
         get_part_Of_speech = getResult.findAll('span', class_='pos dpos')
         get_part_of_speech_text = get_part_Of_speech[pos].text.strip()
-        print(get_part_of_speech_text)
+        get_value['PartOfSpeech'] = get_part_of_speech_text
+        # print(get_part_of_speech_text)
 
         # Explain => def-block ddef_block
         get_explain = get_part_of_speech_amount[pos].find_all('div',class_='def-block ddef_block')
@@ -76,22 +83,33 @@ def main():
             # English
             get_explain_English = get_explain[explain].find('div', class_='def ddef_d db')
             explain_English = get_explain_English.text.strip()
-            print("<div>"+explain_English+"<div>")
+            # get_value['Explain'] = explain_English
+            explain_English = "<div>"+explain_English+"<div>"
+            get_Total = explain_English + get_Total
+            # print("<div>"+explain_English+"<div>")
 
             # Mandarin
             get_explain_Mandarin = get_explain[explain].find('span', class_='trans dtrans dtrans-se')
             explain_Mandarin = get_explain_Mandarin.text.strip()
+            explain_Mandarin = "<div>"+explain_Mandarin+"<div>"
+            get_Total = explain_Mandarin + get_Total
+            get_value['Explain'] = get_Total
+            # explain_Mandarin = get_explain_Mandarin.text.strip()
+            # get_Total = explain_Mandarin + get_Total
 
             # print(explain_Mandarin)
-            print("<div>"+explain_Mandarin+"<div>")
-            print("")
+            # print("<div>"+explain_Mandarin+"<div>")
+            # print("")
 
             # Next time work to add example in explain
             # if getExplain_In_block[1].find('div',class_='examp dexamp'):
             #     print("yes")
             # else:
             #     print('no')
+    
+
+            return get_value
 
 
-if __name__== "__main__":
-    main()
+# if __name__== "__main__":
+#     main()
