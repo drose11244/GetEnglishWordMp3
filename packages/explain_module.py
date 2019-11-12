@@ -58,14 +58,14 @@ def get_explain(word):
             get_explain_English = get_explain[explain].find('div', class_='def ddef_d db')
             explain_English = get_explain_English.text.strip()
             # get_value['Explain'] = explain_English
-            explain_English = "<div>"+explain_English+"<div>"
+            explain_English = "<div>"+explain_English+"</div>"
             get_Total = explain_English + get_Total
             # print("<div>"+explain_English+"<div>")
 
             # Mandarin
             get_explain_Mandarin = get_explain[explain].find('span', class_='trans dtrans dtrans-se')
             explain_Mandarin = get_explain_Mandarin.text.strip()
-            explain_Mandarin = "<div>"+explain_Mandarin+"<div>"
+            explain_Mandarin = "<div>"+explain_Mandarin+"</div>"
             get_Total = explain_Mandarin + get_Total
             get_value['Explain'] = get_Total
             # explain_Mandarin = get_explain_Mandarin.text.strip()
