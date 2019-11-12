@@ -1,10 +1,2 @@
-tulip
-mania
-scare
-amind
-certain
-Helland
-bulb
-turkish
-empire
-botanist
+hello
+world

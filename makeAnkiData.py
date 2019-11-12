@@ -12,7 +12,7 @@ import packages.englishmp3_module as englishmp3_module
 
 
 def main():
-    # try:
+    try:
         with open('input.txt', "r", encoding='utf-8') as input_target:
             get_input_txt = input_target.read()
             get_keyword = get_input_txt.split("\n")
@@ -71,9 +71,14 @@ def main():
                                 write_file.write(text)
                         except :
                             pass
-    # except:
-    #     # print("read file and write file has  error.")
-    #     print("請確認 input.txt 是否存在，且檔案中至少需要一筆資料。")
+    except:
+        # print("read file and write file has  error.")
+        print("請確認 input.txt 是否存在，且檔案中至少需要一筆資料。")
+        with open('input.txt', "a", encoding='utf-8') as input_target:
+            input_target.write('hello\n')
+            input_target.write('world\n')
+            print("已生產input.txt")
+        
 
 
 
