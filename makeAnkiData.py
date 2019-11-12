@@ -57,7 +57,7 @@ def main():
                             writer = csv.writer(csvfile)
                             writer.writerow([WORD, POS, VOICES, EXPLAIN])
                             print(str(WORD) + ' 已寫入CSV檔案')
-                            englishmp3_module.getEnglishMp3(inputWord)
+                            englishmp3_module.getEnglishMp3(WORD)
                     except:
                         print("Output has error.")
                         pass
@@ -78,10 +78,6 @@ def main():
             input_target.write('hello\n')
             input_target.write('world\n')
             print("已生產input.txt")
-        
-
-
-
 
 if __name__== "__main__":
     main()
