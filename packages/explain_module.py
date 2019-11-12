@@ -30,56 +30,73 @@ def get_explain(word):
 
 
     #音標 Phonetic symbol
-    get_phonetic_symbol = getResult.findAll('span', class_='ipa dipa lpr-2 lpl-1')
+    get_phonetic_symbol = getResult.find_all('span', class_='ipa dipa lpr-2 lpl-1')
     phonetic_symbol = '/'+get_phonetic_symbol[0].text.strip()+'/'
     get_value['PhoneticSymol'] = phonetic_symbol
-    # get_value['PhoneticSymbol':phonetic_symbol]
     # print(phonetic_symbol)
     # print("")
-    
 
     # get part of speech
     get_part_of_speech_amount = getResult.find_all('div',class_='pr entry-body__el')
     len_part_od_speech = len(get_part_of_speech_amount)
-    for pos in range(0,len_part_od_speech):
 
+    for position_part_of_speech in range(0,len_part_od_speech):
         # part of speech
-        get_part_Of_speech = getResult.findAll('span', class_='pos dpos')
-        get_part_of_speech_text = get_part_Of_speech[pos].text.strip()
-        get_value['PartOfSpeech'] = get_part_of_speech_text
+        get_part_Of_speech = getResult.find_all('span', class_='pos dpos')
+        get_part_of_speech_text = get_part_Of_speech[position_part_of_speech].text.strip()
+        # get_value['PartOfSpeech'] = get_part_of_speech_text
+        part_of_speech = "<div>"+get_part_of_speech_text+"</div>"
+        get_Total += part_of_speech
         # print(get_part_of_speech_text)
 
-        # Explain => def-block ddef_block
-        get_explain = get_part_of_speech_amount[pos].find_all('div',class_='def-block ddef_block')
+        ## Explain => def-block ddef_block
+        get_explain = get_part_of_speech_amount[position_part_of_speech].find_all('div',class_='def-block ddef_block')
         let_explain = len(get_explain)
+
         for explain in range(0,let_explain):
 
-            # English
-            get_explain_English = get_explain[explain].find('div', class_='def ddef_d db')
-            explain_English = get_explain_English.text.strip()
-            # get_value['Explain'] = explain_English
-            explain_English = "<div>"+explain_English+"</div>"
-            get_Total = explain_English + get_Total
-            # print("<div>"+explain_English+"<div>")
+            # English => ddef_h
+            get_explain_English = get_explain[explain].find_all('div', class_='def ddef_d db')
+            len_get_explain_English = len(get_explain_English)
+            for position_explain_in_Enghish in range(0,len_get_explain_English):
+                get_explain_English = get_explain_English[position_explain_in_Enghish]
+                explain_English = get_explain_English.text
+                explain_English = "<div>"+explain_English+"</div>"
+                get_Total += explain_English
+                # print(explain_English)
 
-            # Mandarin
-            get_explain_Mandarin = get_explain[explain].find('span', class_='trans dtrans dtrans-se')
-            explain_Mandarin = get_explain_Mandarin.text.strip()
-            explain_Mandarin = "<div>"+explain_Mandarin+"</div>"
-            get_Total = explain_Mandarin + get_Total
-            get_value['Explain'] = get_Total
-            # explain_Mandarin = get_explain_Mandarin.text.strip()
-            # get_Total = explain_Mandarin + get_Total
+            # Mandarin => def-body ddef_b
+            get_explain_Mandarin = get_explain[explain].find_all('span', class_='trans dtrans dtrans-se')
+            len_get_explain_Mandarin = len(get_explain_Mandarin)
+            for Position_explain_in_Mandarin in range(0,len_get_explain_Mandarin):
+                get_explain_Mandarin = get_explain_Mandarin[Position_explain_in_Mandarin]
+                explain_Mandarin = get_explain_Mandarin.text
+                explain_Mandarin = "<div>"+explain_Mandarin+"</div>"
+                get_Total += explain_Mandarin
+                # print(explain_Mandarin)
 
-            # print(explain_Mandarin)
-            # print("<div>"+explain_Mandarin+"<div>")
-            # print("")
+                get_example_English = get_explain[explain].find_all('span', class_='eg deg')
+                get_example_Mandarin = get_explain[explain].find_all('span', class_='trans dtrans dtrans-se hdb')
+                let_example = len(get_example_English)
 
-            # Next time work to add example in explain
-            # if getExplain_In_block[1].find('div',class_='examp dexamp'):
-            #     print("yes")
-            # else:
-            #     print('no')
-    
+                for pos_example in range(0,let_example):
 
-            return get_value
+                    example_English = get_example_English[pos_example].text
+                    example_English = "<div>"+example_English+"</div>"
+                    get_Total += example_English
+
+                    example_Mandarin = get_example_Mandarin[pos_example].text
+                    example_Mandarin = "<div>"+example_Mandarin+"</div>"
+                    get_Total += example_Mandarin
+                    
+                    # print(example_English)
+                    # print(example_Mandarin)
+
+    example_Mandarin = "<a href=\""+ dict_url +"\" >More...</a>"
+    get_Total += example_Mandarin
+    get_value['Explain'] = get_Total
+
+    print(get_value)
+    print("")
+
+    return get_value

@@ -3,7 +3,7 @@
 
 # file= explain_module.py
 # file = getEnglishMP3.py
-# file = explain.py
+# file = freedom.py
 file = makeAnkiData.py
 
 all:
