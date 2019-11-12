@@ -60,7 +60,7 @@ def main():
                             englishmp3_module.getEnglishMp3(WORD)
                     except:
                         print("Output has error.")
-                        pass
+                        # pass
                 
                 else:
                         err_namePath = 'error_'+filename
@@ -70,7 +70,14 @@ def main():
                                 text = inputWord+'\n'
                                 write_file.write(text)
                         except :
+                            print("buliding error_csv has error")
                             pass
+
+    except KeyboardInterrupt:
+        print ("")
+        print ("Bye")
+        sys.exit()
+        
     except:
         # print("read file and write file has  error.")
         print("請確認 input.txt 是否存在，且檔案中至少需要一筆資料。")
@@ -78,6 +85,8 @@ def main():
             input_target.write('hello\n')
             input_target.write('world\n')
             print("已生產input.txt")
+    finally:
+        print('完成')
 
 if __name__== "__main__":
     main()

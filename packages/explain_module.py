@@ -6,12 +6,11 @@ import csv
 import packages.cookieAndheaders as cookieAndheaders
 
 def get_explain(word):
+    
     get_value ={}
     get_Total=''
     search_word = word
-    dict_url_header = 'https://dictionary.cambridge.org/zht/%E8%A9%9E%E5%85%B8/%E8%8B%B1%E8%AA%9E-%E6%BC%A2%E8%AA%9E-%E7%B9%81%E9%AB%94/'
-    dict_url = dict_url_header+search_word
-
+    dict_url = cookieAndheaders.dictitionaryHeaders + search_word
     response = requests.get(dict_url, headers=cookieAndheaders.headers, cookies=cookieAndheaders.cookies)
     getResult = bs4.BeautifulSoup(response.text,"html.parser")
 
