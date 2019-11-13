@@ -16,7 +16,6 @@ def main():
 
     while(1):
         try:
-            # dict_url = 'https://dictionary.cambridge.org/zht/%E8%A9%9E%E5%85%B8/%E8%8B%B1%E8%AA%9E-%E6%BC%A2%E8%AA%9E-%E7%B9%81%E9%AB%94/hello'
             print("input search word ")
             search_word = input()
             dict_url_header = 'https://dictionary.cambridge.org/zht/%E8%A9%9E%E5%85%B8/%E8%8B%B1%E8%AA%9E-%E6%BC%A2%E8%AA%9E-%E7%B9%81%E9%AB%94/'
@@ -24,17 +23,19 @@ def main():
             
             get_dict_information = requests.get(dict_url, headers=cookieAndheaders.headers, cookies=cookieAndheaders.cookies)
             getResult = bs4.BeautifulSoup(get_dict_information.text,'html.parser')
+            getWord = getResult.findAll('div', class_='di-title')
+            if not getWord:
+                # Not Found Word.
+                print("Not found.")
+                return 0
+            getWord = getWord[1].text.strip()
+
             allData = getResult.findAll('source')
             websit_mp3_header = 'https://dictionary.cambridge.org'
             get_dict_websit_mp3 = str(websit_mp3_header)+allData[2]['src']
-            # print("Input your URL: ")
-            # url = input()
             url = get_dict_websit_mp3
             response = requests.get(url, headers=cookieAndheaders.headers, cookies=cookieAndheaders.cookies)
-
-            # filen_information = urlparse(url)
-            # url_path = filen_information.path
-            get_basename = search_word+".mp3"
+            get_basename = getWord+".mp3"
             folder = 'voices/'
             if not os.path.exists(folder):
                 os.makedirs(folder)
