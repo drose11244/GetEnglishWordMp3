@@ -22,7 +22,7 @@ def fun_Explain(word):
 
         if not get_Word:
             # Not Found Word.
-            print("Not Found.\n")
+            # print("Not Found.\n")
             return 0
 
         get_Word = get_Word[1].text.strip()

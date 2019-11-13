@@ -16,7 +16,7 @@ def func_EnglishMp3(word):
         get_Result = bs4.BeautifulSoup(get_dict_information.text, 'html.parser')
         get_Word = get_Result.findAll('div', class_='di-title')
         if not get_Word:
-            print("Not found.")
+            # print("Not found.")
             return 0
         get_Word = get_Word[1].text.strip()
         
@@ -28,7 +28,7 @@ def func_EnglishMp3(word):
             mp3_url, headers=tools.headers, cookies=tools.cookies)
 
         file_mp3 = get_Word+".mp3"
-        folder = 'voices/'
+        folder = './voices/'
         if not os.path.exists(folder):
             os.makedirs(folder)
             print("音檔資料已建立\n")

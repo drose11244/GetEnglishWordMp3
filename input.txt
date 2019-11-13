@@ -1,5 +1,2 @@
-Count
-Hello
-bird
-free
-time
+hello
+world
