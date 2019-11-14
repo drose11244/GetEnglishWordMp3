@@ -1,7 +1,0 @@
-test
-vocabulary
-
-gced
-
-check
-gced
