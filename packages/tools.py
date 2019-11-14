@@ -3,7 +3,6 @@ import os
 import sys
 
 
-
 def get_date():
     time = datetime.datetime.now()
     year = time.year
@@ -16,16 +15,13 @@ def get_date():
         str(hour) + str(mins) + str(second)
     return getTimeNow
 
-def get_current_pwd():
 
-    # normal
-    # path = os.getcwd()
+def show_where():
+    print("show_where: sys.argv[0] is", repr(sys.argv[0]))
+    print("show_where: __file__ is", repr(__file__))
+    print("show_where: cwd is", repr(os.getcwd()))
 
-    # executable file
-    path = sys.argv[0]
-
-    return path
-
+    return
 
 
 cookies = {
@@ -50,5 +46,7 @@ headers = {
     'Connection': 'keep-alive',
 }
 
+
+main_folder = './output/'
 
 dictitionaryHeaders = 'https://dictionary.cambridge.org/zht/%E8%A9%9E%E5%85%B8/%E8%8B%B1%E8%AA%9E-%E6%BC%A2%E8%AA%9E-%E7%B9%81%E9%AB%94/'

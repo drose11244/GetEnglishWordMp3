@@ -10,21 +10,22 @@ import packages.englishmp3_module as englishmp3_module
 import packages.tools as tools
 
 
-
 def main():
-    input_file_path = tools.get_current_pwd()+'/input.txt'
+    # input_file_path = tools.get_current_pwd()+'/input.txt'
 
-    try:    
+    input_file_path = 'input.txt'
+
+    try:
         with open(input_file_path, "r", encoding='utf-8') as input_target:
-            
+
             get_input_txt = input_target.read()
             get_keyword = get_input_txt.split("\n")
             len_keyword = len(get_keyword)
 
-            
             filename = tools.get_date()+".csv"
-            folderName = '/OutputCSV/'
-            OutputCSV_folderPath = tools.get_current_pwd()+folderName
+            folderPath = tools.main_folder+'csv/'
+            out_csv_path = folderPath+filename
+
             for i in range(0, len_keyword):
                 input_Word = get_keyword[i]
                 get_explain = explain_module.fun_Explain(input_Word)
@@ -41,13 +42,11 @@ def main():
                     # print(get_explain['PartOfSpeech'])
                     # print(get_explain['Explain'])
 
-                    if not os.path.exists(OutputCSV_folderPath):
-                        os.makedirs(OutputCSV_folderPath)
-                        print(OutputCSV_folderPath+" 已建立資料夾\n")
-                        
+                    if not os.path.exists(folderPath):
+                        os.makedirs(folderPath)
+                        print(folderPath+" 已建立資料夾\n")
 
-                     
-                    with open(OutputCSV_folderPath+filename, 'a', newline='') as csvfile:
+                    with open(out_csv_path, 'a', newline='') as csvfile:
                         writer = csv.writer(csvfile)
                         writer.writerow([WORD, POS, VOICES, EXPLAIN])
                         print(str(WORD) + ' 已寫入CSV檔案\n')
@@ -55,18 +54,16 @@ def main():
 
                 else:
 
-                    if input_Word == '':
-                        # print("only space.")
-                        return 0
-
-                    err_namePath = 'error_'+filename
-                    err_folderPath = tools.get_current_pwd()+'/OutputCSV/'+err_namePath
-                    try:
-                        with open(err_folderPath, 'a', encoding='utf-8') as write_file:
-                            text = input_Word+'\n'
-                            write_file.write(text)
-                    except:
-                        print("error_csv_Unexpected error:", sys.exc_info()[0])
+                    # detect space
+                    if input_Word != '':
+                        err_file_path = folderPath+'error_'+filename
+                        try:
+                            with open(err_file_path, 'a', encoding='utf-8') as write_file:
+                                text = input_Word+'\n'
+                                write_file.write(text)
+                        except:
+                            print("error_csv_Unexpected error:",
+                                  sys.exc_info()[0])
 
     except KeyboardInterrupt:
         print("Bye ~ ~")
@@ -77,8 +74,8 @@ def main():
         if not os.path.isfile(input_file_path):
             print("請確認 input.txt 是否存在，且檔案中至少需要一筆資料。")
             with open(input_file_path, "a", encoding='utf-8') as input_target:
-                input_target.write('hello\n')
-                input_target.write('world\n')
+                input_target.write('test\n')
+                input_target.write('vocabulary\n')
                 print('已經自動建立 '+input_file_path)
                 print('請將單字放到 input.txt 再執行一次')
     finally:

@@ -9,5 +9,9 @@ file = makeAnkiData.py
 all:
 	python3 $(file)
 
+clean:
+	rm -rf hello
+
 file:
 	pyinstaller -F $(file)
+	echo $(file)
