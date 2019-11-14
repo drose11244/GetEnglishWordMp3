@@ -94,3 +94,4 @@ def fun_Explain(word):
 
     except:
         print("Explain_Unexpected error:", sys.exc_info()[0])
+        

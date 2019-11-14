@@ -78,6 +78,11 @@ def main():
                 input_target.write('vocabulary\n')
                 print('已經自動建立 '+input_file_path)
                 print('請將單字放到 input.txt 再執行一次')
+    else:
+        print("請將 output/voices/ 中的mp3音檔放到Anki語音的路徑")              
+        print("每個人的放置音檔的路徑都不大一樣，記得確認一下喔")
+        print("Anki 音檔預設路徑："+ tools.media_folder)
+        
     finally:
         print('完成\n')
 
