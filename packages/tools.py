@@ -16,24 +16,24 @@ def get_date():
     return getTimeNow
 
 
-
 def show_where():
     print("show_where: sys.argv[0] is", repr(sys.argv[0]))
     print("show_where: __file__ is", repr(__file__))
     print("show_where: cwd is", repr(os.getcwd()))
     return
 
+
 def get_platform():
     platforms = {
-        'aix' : 'AIX',
-        'linux' : 'Linux',
-        'darwin' : 'macOS',
-        'win32' : 'Windows',
-        'cygwin':'Windows/Cygwin',
+        'aix': 'AIX',
+        'linux': 'Linux',
+        'darwin': 'macOS',
+        'win32': 'Windows',
+        'cygwin': 'Windows/Cygwin',
     }
     if sys.platform not in platforms:
         return sys.platform
-    
+
     return platforms[sys.platform]
 
 
@@ -61,23 +61,23 @@ headers = {
 
 output_file_name = 'output/'
 
-if get_platform() == 'linux':
+
+if get_platform() == 'Linux':
     current_path = os.getcwd()
-    main_folder = './'+ output_file_name
+    main_folder = './' + output_file_name
 
 if get_platform() == 'macOS':
-    
-    ### Executable
+
+    # Executable
     path = sys.argv[0]
     get_baseName_position = path.rfind('/')
     get_kill_word = -len(path[get_baseName_position:])
     current_path = path[:get_kill_word]
     main_folder = current_path + '/' + output_file_name
-    
-    ### Directly to execute file
+
+    # Directly to execute file
     # current_path = os.getcwd()
     # main_folder = current_path + '/' +output_file_name
-
 
 
 dictitionaryHeaders = 'https://dictionary.cambridge.org/zht/%E8%A9%9E%E5%85%B8/%E8%8B%B1%E8%AA%9E-%E6%BC%A2%E8%AA%9E-%E7%B9%81%E9%AB%94/'

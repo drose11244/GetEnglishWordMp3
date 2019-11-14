@@ -11,9 +11,7 @@ import packages.tools as tools
 
 
 def main():
-    # input_file_path = tools.get_current_pwd()+'/input.txt'
 
-    # input_file_path = 'input.txt'
     file_name = '/input.txt'
     input_file_path = tools.current_path + file_name
 
