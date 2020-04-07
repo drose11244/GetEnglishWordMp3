@@ -12,3 +12,6 @@ all:
 package:
 	pyinstaller -F $(file)
 	echo $(file)
+
+clean:
+	rm -rf *.spec

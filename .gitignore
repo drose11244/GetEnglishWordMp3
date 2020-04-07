@@ -4,3 +4,5 @@ voices/
 dist/
 OutputCSV/
 freedom.py
+*.csv
+*.mp3
